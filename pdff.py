@@ -48,9 +48,9 @@ root = tk.Tk()
 root.title(u"PDF")
 root.geometry("300x200")
 
-btn1 = ttk.Button(root, text="Generate PDF", width=15, command=generatePDF)
-label1 = ttk.Label(text="File Path")
-label2 = ttk.Label(text="Page Number")
+btn1 = ttk.Button(root, text="PDFファイルの保存", width=15, command=generatePDF)
+label1 = ttk.Label(text="ファイルのパスを指定")
+label2 = ttk.Label(text="抽出するページ数")
 IDirButton = ttk.Button(text="参照", command=dirdialog_clicked)
 
 txt1 = ttk.Entry(width=20)
