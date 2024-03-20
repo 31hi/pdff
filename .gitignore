@@ -1,0 +1,5 @@
+*.exe
+dist/
+innosetup/
+build/
+PDFF.spec
