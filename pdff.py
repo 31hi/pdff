@@ -45,7 +45,7 @@ def dirdialog_clicked() :
 ctypes.windll.shcore.SetProcessDpiAwareness(1)
 root = tk.Tk()
 
-root.title(u"PDF")
+root.title(u"PDFF")
 root.geometry("500x250")
 root.minsize(500, 250)
 
