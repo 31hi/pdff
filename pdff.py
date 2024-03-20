@@ -1,4 +1,5 @@
 import os
+import ctypes
 from pypdf import PdfReader, PdfWriter
 import tkinter as tk
 import subprocess
@@ -41,6 +42,7 @@ def dirdialog_clicked() :
     txt1.insert(tk.END, file_path)
 
 #画面に表示するコンテンツを作成
+ctypes.windll.shcore.SetProcessDpiAwareness(1)
 root = tk.Tk()
 
 root.title(u"PDF")
