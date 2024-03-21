@@ -1,1 +1,4 @@
 build/
+dist/
+inno_setup/
+pdff.spec
