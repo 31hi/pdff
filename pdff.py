@@ -9,8 +9,31 @@ from tkinter import filedialog
 
 #PDFを生成するボタンが押されたとき
 def generatePDF() :
+
+    # txt2から取得したデータをページ番号に振り分け配列をつくる
+    pages = txt2.get()
+    pageArr = []
+    if ',' in pages:
+        splitByComma = pages.split(',')
+        for page in splitByComma:
+            page = page.strip()
+            if '-' in page:
+                pageSpace = page.split('-')
+                pageArr.extend(range(int(pageSpace[0]), int(pageSpace[1]) + 1))
+            else:
+                pageArr.append(int(page))
+    else:
+        if '-' in pages:
+            pageSpace = pages.split('-')
+            pageArr.extend(range(int(pageSpace[0]), int(pageSpace[1]) + 1))
+        else:
+            pageArr = int(page)
+
+    # 分割するファイルを指定
     targetFile = txt1.get()
-    targetPage = int(txt2.get()) - 1
+    pageArr = list(map(lambda x: x-1, pageArr))
+
+    # 保存先のPDFファイル
     reader = PdfReader(targetFile)
     filename = filedialog.asksaveasfilename(
         title = "名前を付けて保存",
@@ -21,11 +44,10 @@ def generatePDF() :
     # 書き込み用のオブジェクトを作成
     writer = PdfWriter()
 
-    # targetPath番目の要素(1ページ目のPDF)を抜き出す
-    pdf = reader.pages[targetPage]
-
-    # 書き込み用オブジェクトに追加
-    writer.add_page(pdf)
+    # PDFを抜き出す
+    reader = PdfReader(targetFile)
+    for i in pageArr:
+        writer.add_page(reader.pages[i])
 
     # ファイルに書き出し
     with open(filename, "wb") as fp:
@@ -33,7 +55,6 @@ def generatePDF() :
 
     #エクスプローラーを開く
     subprocess.run(['start', '', filename], shell=True)
-
 #参照ボタンがおされたとき
 def dirdialog_clicked() :
     idir = ''
