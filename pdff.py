@@ -69,7 +69,6 @@ root = tk.Tk()
 root.title(u"PDFF")
 root.geometry("500x250")
 root.minsize(500, 250)
-root.iconphoto(False, tk.PhotoImage(file = "img/pdff.ico"))
 
 frameOfInputAndOutPut = ttk.Frame(root)
 frameOfInput = ttk.Frame(frameOfInputAndOutPut)
