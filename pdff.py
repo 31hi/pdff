@@ -22,16 +22,17 @@ def generatePDF() :
                 pageArr.extend(range(int(pageSpace[0]), int(pageSpace[1]) + 1))
             else:
                 pageArr.append(int(page))
+        pageArr = list(map(lambda x: x-1, pageArr))
     else:
         if '-' in pages:
             pageSpace = pages.split('-')
             pageArr.extend(range(int(pageSpace[0]), int(pageSpace[1]) + 1))
+            pageArr = list(map(lambda x: x-1, pageArr))
         else:
-            pageArr = int(page)
+            pageArr = int(pages)
 
     # 分割するファイルを指定
     targetFile = txt1.get()
-    pageArr = list(map(lambda x: x-1, pageArr))
 
     # 保存先のPDFファイル
     reader = PdfReader(targetFile)
@@ -46,8 +47,13 @@ def generatePDF() :
 
     # PDFを抜き出す
     reader = PdfReader(targetFile)
-    for i in pageArr:
-        writer.add_page(reader.pages[i])
+
+    if isinstance(pageArr, list):
+        for i in pageArr:
+            writer.add_page(reader.pages[i])
+
+    else:
+        writer.add_page(reader.pages[pageArr-1])
 
     # ファイルに書き出し
     with open(filename, "wb") as fp:
